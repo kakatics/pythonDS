@@ -11,7 +11,7 @@ Create the well known Data Structures in Python.
 
 ```sh
 $ git clone https://github.com/kakatics/pythonDS.git
-$ cd pythonDSA
+$ cd pythonDS
 $ cd stack
 $ python3 -i Stack.py # Load the DS in the Python Emulator
 ```
