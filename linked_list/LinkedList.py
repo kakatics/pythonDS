@@ -55,7 +55,12 @@ class LinkedList(object):
     currentNode = self.head
     previousNode = None
 
-    while currentNode is not None:
+    if currentNode.data == data:
+      self.head = currentNode.nextNode
+      self.size -= 1
+      return
+
+    while currentNode:
       if currentNode.data != data:
         previousNode = currentNode
         currentNode = currentNode.nextNode
@@ -63,6 +68,25 @@ class LinkedList(object):
         previousNode.nextNode = currentNode.nextNode
         self.size -= 1
         break
+
+  def removeAtPosition(self, pos):
+    if self.size <= 0 or self.size <= pos:
+      return
+
+    currentNode = self.head
+    previousNode = None
+
+    if pos == 0:
+      self.head = currentNode.nextNode
+      self.size -= 1
+      return
+
+    for i in range(pos):
+      previousNode = currentNode
+      currentNode = currentNode.nextNode
+
+    previousNode.nextNode = currentNode.nextNode
+    self.size -= 1
 
   def traverseList(self):
     if self.size <= 0:
@@ -75,29 +99,3 @@ class LinkedList(object):
       currentNode = currentNode.nextNode
     print(currentNode.data)
 
-
-ll = LinkedList()
-ll.traverseList()
-ll.insertAtEnd(1)
-ll.insertAtStart(3)
-ll.insertAtStart(5)
-ll.insertAtStart(7)
-ll.insertAtStart(9)
-ll.traverseList()
-print("Size of the Linked List:", ll.getSize())
-ll.remove(5)
-ll.traverseList()
-print("Size of the Linked List:", ll.getSize())
-ll.insertAfterNode(7, 6)
-ll.traverseList()
-print("Size of the Linked List:", ll.getSize())
-ll.insertAtEnd(99)
-ll.traverseList()
-print("Size of the Linked List:", ll.getSize())
-ll.insertAtEnd(999)
-ll.traverseList()
-print("Size of the Linked List:", ll.getSize())
-ll.remove(78)
-ll.remove(999)
-ll.traverseList()
-print("Size of the Linked List:", ll.getSize())
