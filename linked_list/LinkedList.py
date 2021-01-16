@@ -26,9 +26,24 @@ class LinkedList(object):
     if self.head is None:
       self.head = newNode
     else:
-      while currentNode.nextNode is not None:
+      while currentNode.nextNode:
         currentNode = currentNode.nextNode
       currentNode.nextNode = newNode
+
+  def insertAfterNode(self, prevNode, data):
+    newNode = Node(data)
+    currentNode = self.head
+
+    while currentNode.data != prevNode and currentNode:
+      currentNode = currentNode.nextNode
+    
+    if currentNode is None:
+      return
+
+    newNode.nextNode = currentNode.nextNode
+    currentNode.nextNode = newNode
+    self.size += 1
+
 
   def getSize(self):
     return self.size
@@ -69,17 +84,20 @@ ll.insertAtStart(5)
 ll.insertAtStart(7)
 ll.insertAtStart(9)
 ll.traverseList()
-print(ll.getSize())
+print("Size of the Linked List:", ll.getSize())
 ll.remove(5)
 ll.traverseList()
-print(ll.getSize())
+print("Size of the Linked List:", ll.getSize())
+ll.insertAfterNode(7, 6)
+ll.traverseList()
+print("Size of the Linked List:", ll.getSize())
 ll.insertAtEnd(99)
 ll.traverseList()
-print(ll.getSize())
+print("Size of the Linked List:", ll.getSize())
 ll.insertAtEnd(999)
 ll.traverseList()
-print(ll.getSize())
+print("Size of the Linked List:", ll.getSize())
 ll.remove(78)
 ll.remove(999)
 ll.traverseList()
-print(ll.getSize())
+print("Size of the Linked List:", ll.getSize())
