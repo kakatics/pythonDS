@@ -61,3 +61,45 @@ class BST(object):
 
     if node.rightChild:
       self.traverseInOrder(node.rightChild)
+
+  def remove(self, data):
+    if self.root:
+      self.root = self.removeNode(data, self.root)
+
+  def removeNode(self, data, node):
+    if not node:
+      return node
+
+    if data < node.data:
+      node.leftChild = self.removeNode(data, node.leftChild)
+    elif data > node.data:
+      node.rightChild = self.removeNode(data, node.rightChild)
+    else:
+      if not node.leftChild and not node.rightChild:
+        print("Removing a leaf node...")
+        del node
+        return None
+      if not node.rightChild:
+        print("Removing a node with single left child...")
+        tempNode = node.leftChild
+        del node
+        return tempNode
+      if not node.leftChild:
+        print("Removing a node with single right child...")
+        tempNode = node.rightChild
+        del node
+        return tempNode
+
+      print("Removing a node with 2 children...")
+      tempNode = self.getPredecessor(node.leftChild)
+      node.data = tempNode.data
+      node.leftChild = self.removeNode(tempNode.data, node.leftChild)
+
+    return node
+
+  def getPredecessor(self, node):
+    if node.rightChild:
+      return self.getPredecessor(node.rightChild)
+
+    return node
+
